@@ -1,13 +1,33 @@
 \section{Introduction}
 \label{sec:intro}
 
-Systems-on-chip (SoCs) with increasingly complex integration primarily rely on on-chip shared memory for performance. Like caches on single-core processors,
-implementing cache-coherence via a cache hierarchy on a multi-core system can greatly improve performance and reduce energy consumption. Previous works have also shown that this can be
-extended to heterogeneous SoCs, which has the added complexity of managing accelerator memory accesses together with multi-core cache coherence.
-\par ESP is an open-source platform for hetergeneous SoC design that streamlines the integration of heterogeneous components in SoC architecture.
-The ESP architecture utilizes an extended MESI directory-based cache coherence protocol to implement cache coherence across the processors and accelerators in the system. The ESP cache hierarchy consists of L1/L2 caches that are coupled
-to the processors and accelerators, as well as a last-level cache (LLC) that not only enables coherence between all L1/L2 caches and main memory, but also allows for accelerators without L1/L2 caches to have access to
-faster memory acceses directly from the LLC. As shown in a previous work by Giri et al., the ESP LLC is able to greatly reduce the number of accesses to main memory and improve the performance of such LLC-coherent accelerators.
-\par In this work, we present an improved version of the ESP LLC. While the original version is implemented with a multi-cycle datapath, the improved version features a pipelined datapath, 
-allowing for significantly greater throughput for high density work loads. In particular, large memory accesses by accelerators utilize the full capacity of the pipelined datapath and therefore experience particularly large imporvements 
-to performance.
+Systems-on-chip (SoCs) that integrate a heterogeneous mix of complex IP blocks
+can utilize on-chip shared memory to improve performance and simplify
+programming \cite{spandex, cohort, li2023duet, mantovani_cases16}.  Like that
+of traditional homogeneous architectures, the memory hierarchy of heterogeneous
+SoCs may feature multiple levels of caches, orchestrated by a cache coherence
+protocol. For example, Giri et al. propose a cache hierarchy for heterogeneous
+SoCs built on top of a network-on-chip (NoC) \cite{giri18}.  Their cache
+hierarchy supports multicore execution of processor cores and enables multiple
+different coherence modes for hardware accelerators.  Utilization of these
+modes can improve execution time and reduce off-chip memory acceses for a
+variety of different workloads \cite{giri_ieeemicro18, zuckerman_micro21}.
+
+\par ESP is an open-source platform for hetergeneous SoC design that simplifies
+the integration of new IP blocks within a scalable SoC architecture and allows
+for rapid prototyping of full systems \cite{mantovani_iccad20}. ESP's cache
+hierarchy implements the protocol proposed by Giri et al -- an extended MESI
+directory-based protocol.  The L1 of open-source processors (that potentially
+implement different ISAs) interfaces to the ESP L2. The last-level cache (LLC)
+and directory controller not only orchestrate coherence across these L2 caches
+but also enable accelerators without a private cache to leverage the cache
+hierarchy to access on-chip shared data.
+
+\par In this work, we present an improved version of the ESP LLC. While the
+original version is implemented with a multi-cycle datapath, the improved
+version features a pipelined datapath, allowing for significantly greater
+throughput. Since the last-level cache is the main synchronization point for
+the various IPs throughout an SoC, this can give significant performance
+improvements when there is a high density of requests at the LLC. In
+particular, we show how the pipelined datapath can improve the performance of
+accelerators that acceess their data directly from the LLC.

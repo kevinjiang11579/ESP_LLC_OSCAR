@@ -17,4 +17,88 @@
   doi={10.1109/NOCS.2018.8512153}
   }
 
+@inproceedings{spandex,
+    author = {Alsop, Johnathan and Sinclair, Matthew D. and Adve, Sarita V.},
+    title = {Spandex: A Flexible Interface for Efficient Heterogeneous Coherence},
+    year = {2018},
+    isbn = {9781538659847},
+    publisher = {IEEE Press},
+    url = {https://doi.org/10.1109/ISCA.2018.00031},
+    doi = {10.1109/ISCA.2018.00031},
+    abstract = {Recent heterogeneous architectures have trended toward tighter integration and shared memory largely due to the efficient communication and programmability enabled by this shift. However, such integration is complex, because accelerators have widely disparate methods for accessing and keeping data coherent. Some processors use caches backed by hardware coherence protocols like MESI, while others prefer lightweight software coherence protocols or use specialized memories like scratchpads with differing state and communication granularities. Modern solutions tend to build interfaces that extend existing MESI-style CPU coherence protocols, often by adding hierarchical indirection through intermediate shared caches. Although functionally correct, these strategies lack flexibility and generally suffer from performance limitations that make them sub-optimal for some emerging accelerators and workloads.Instead, we need a flexible interface that can efficiently integrate existing and future devices - without requiring intrusive changes to their memory structure. We introduce Spandex, an improved coherence interface based on the simple and scalable DeNovo coherence protocol. Spandex (which takes its name from the flexible material commonly used in one-size-fits-all textiles) directly interfaces devices with diverse coherence properties and memory demands, enabling each device to communicate in a manner appropriate for its specific access properties. We demonstrate the importance of this flexibility by comparing this strategy against a more conventional MESI-based hierarchical solution for a diverse range of heterogeneous applications. On average for the applications studied, Spandex reduces execution time by 16% (max 29%) and network traffic by 27% (max 58%) relative to the MESI-based hierarchical solution.},
+    booktitle = {Proceedings of the 45th Annual International Symposium on Computer Architecture},
+    pages = {261–274},
+    numpages = {14},
+    location = {Los Angeles, California},
+    series = {ISCA '18}
+}
 
+@inproceedings{cohort,
+    author = {Wei, Tianrui and Turtayeva, Nazerke and Orenes-Vera, Marcelo and Lonkar, Omkar and Balkind, Jonathan},
+    title = {Cohort: Software-Oriented Acceleration for Heterogeneous SoCs},
+    year = {2023},
+    isbn = {9781450399180},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3582016.3582059},
+    doi = {10.1145/3582016.3582059},
+    abstract = {Philosophically, our approaches to acceleration focus on the extreme. We must optimise accelerators to the maximum, leaving software to fix any hardware-software mismatches. Today’s software abstractions for programming accelerators leak hardware details, requiring changes to data formats and manual memory and coherence management, among other issues. This harms generality and requires deep hardware knowledge to efficiently program accelerators, a state which we consider hardware-oriented. This paper proposes Software-Oriented Acceleration (SOA), where software uses existing abstractions, like software shared-memory queues, to interact with accelerators. We introduce the Cohort engine which exploits these queues’ standard semantics to efficiently connect producers and consumers in software with accelerators with minimal application changes. Accelerators are even usable in chains which can be runtime reconfigured by software. Cohort significantly reduces the burden to add new accelerators while maintaining system-level guarantees. We implement a Cohort FPGA prototype which supports SOA applications running on multicore Linux. Our evaluation shows speedups for Cohort over traditional approaches ranging from 1.83\texttimes{} to 8.38\texttimes{} over MMIO, and from 1.69\texttimes{} to 11.24\texttimes{} for DMA baselines. Our software-oriented batching optimisations within Cohort also improve performance from 2.32\texttimes{} to 8.10\texttimes{}, demonstrating the power of SOA.},
+    booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3},
+    pages = {105–117},
+    numpages = {13},
+    keywords = {programming models, accelerators, shared memory, heterogeneous systems},
+    location = {Vancouver, BC, Canada},
+    series = {ASPLOS 2023}
+}
+
+@misc{li2023duet,
+      title={Duet: Creating Harmony between Processors and Embedded FPGAs}, 
+      author={Ang Li and August Ning and David Wentzlaff},
+      year={2023},
+      eprint={2301.02785},
+      archivePrefix={arXiv},
+      primaryClass={cs.AR}
+}
+
+@inproceedings{mantovani_cases16,
+  author = {Mantovani, Paolo and Cota, Emilio G. and Pilato, Christian and Di Guglielmo, Giuseppe and Carloni, Luca P.},
+  title = {Handling Large Data Sets for High-Performance Embedded Applications in Heterogeneous Systems-on-Chip},
+  booktitle = {Proceedings of the International Conference on Compilers, Architecture and Synthesis for Embedded Systems (CASES)},
+  year = {2016},
+  month = oct,
+  isbn = {978-1-4503-4482-1},
+  location = {Pittsburgh, Pennsylvania},
+  pages = {3:1--3:10},
+  articleno = {3},
+  numpages = {10},
+  url = {http://doi.acm.org/10.1145/2968455.2968509},
+  doi = {10.1145/2968455.2968509},
+  acmid = {2968509},
+  publisher = {ACM},
+  address = {New York, NY, USA}
+}
+
+@article{giri_ieeemicro18,
+  author = {Giri, Davide and Mantovani, Paolo and Carloni, Luca P.},
+  journal = {IEEE Micro (Special Issue: Hardware Acceleration)},
+  title = {Accelerators and Coherence: An SoC Perspective},
+  year = {2018},
+  volume = {38},
+  number = {6},
+  pages = {36-45},
+  month = nov
+}
+
+@inproceedings{zuckerman_micro21,
+  author = {Zuckerman, Joseph and Giri, Davide and Kwon, Jihye and Mantovani, Paolo and Carloni, Luca P.},
+  title = {{Cohmeleon: Learning-Based Orchestration of Accelerator Coherence in Heterogeneous SoCs}},
+  booktitle = {Proceedings of the IEEE/ACM Symposium on Microarchitecture (MICRO)},
+  year = {2021}
+}
+
+@inproceedings{mantovani_iccad20,
+  author = {Mantovani, Paolo and Giri, Davide and Di Guglielmo, Giuseppe and Piccolboni, Luca and Zuckerman, Joseph and Cota, Emilio G. and Petracca, Michele and Pilato, Christian and Carloni, Luca P.},
+  title = {{Agile SoC Development with Open ESP}},
+  journal = {Proceedings of the International Conference on Computer-Aided Design (ICCAD)},
+  year = {2020}
+}
