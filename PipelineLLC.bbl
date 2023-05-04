@@ -1,10 +1,59 @@
 \begin{thebibliography}{1}
 
+\bibitem{spandex}
+Johnathan Alsop, Matthew~D. Sinclair, and Sarita~V. Adve.
+\newblock Spandex: A flexible interface for efficient heterogeneous coherence.
+\newblock In {\em Proceedings of the 45th Annual International Symposium on
+  Computer Architecture}, ISCA '18, page 261–274. IEEE Press, 2018.
+
+\bibitem{cohort}
+Tianrui Wei, Nazerke Turtayeva, Marcelo Orenes-Vera, Omkar Lonkar, and Jonathan
+  Balkind.
+\newblock Cohort: Software-oriented acceleration for heterogeneous socs.
+\newblock In {\em Proceedings of the 28th ACM International Conference on
+  Architectural Support for Programming Languages and Operating Systems, Volume
+  3}, ASPLOS 2023, page 105–117, New York, NY, USA, 2023. Association for
+  Computing Machinery.
+
+\bibitem{li2023duet}
+Ang Li, August Ning, and David Wentzlaff.
+\newblock Duet: Creating harmony between processors and embedded fpgas, 2023.
+
+\bibitem{mantovani_cases16}
+Paolo Mantovani, Emilio~G. Cota, Christian Pilato, Giuseppe Di~Guglielmo, and
+  Luca~P. Carloni.
+\newblock Handling large data sets for high-performance embedded applications
+  in heterogeneous systems-on-chip.
+\newblock In {\em Proceedings of the International Conference on Compilers,
+  Architecture and Synthesis for Embedded Systems (CASES)}, pages 3:1--3:10,
+  New York, NY, USA, October 2016. ACM.
+
 \bibitem{giri18}
 Davide Giri, Paolo Mantovani, and Luca~P. Carloni.
 \newblock \textbf{NoC-Based Support of Heterogeneous Cache-Coherence Models for
   Accelerators}.
 \newblock In {\em 2018 Twelfth IEEE/ACM International Symposium on
   Networks-on-Chip (NOCS)}, pages 1--8, 2018.
+
+\bibitem{giri_ieeemicro18}
+Davide Giri, Paolo Mantovani, and Luca~P. Carloni.
+\newblock Accelerators and coherence: An soc perspective.
+\newblock {\em IEEE Micro (Special Issue: Hardware Acceleration)},
+  38(6):36--45, November 2018.
+
+\bibitem{zuckerman_micro21}
+Joseph Zuckerman, Davide Giri, Jihye Kwon, Paolo Mantovani, and Luca~P.
+  Carloni.
+\newblock {Cohmeleon: Learning-Based Orchestration of Accelerator Coherence in
+  Heterogeneous SoCs}.
+\newblock In {\em Proceedings of the IEEE/ACM Symposium on Microarchitecture
+  (MICRO)}, 2021.
+
+\bibitem{mantovani_iccad20}
+Paolo Mantovani, Davide Giri, Giuseppe Di~Guglielmo, Luca Piccolboni, Joseph
+  Zuckerman, Emilio~G. Cota, Michele Petracca, Christian Pilato, and Luca~P.
+  Carloni.
+\newblock {Agile SoC Development with Open ESP}.
+\newblock 2020.
 
 \end{thebibliography}
