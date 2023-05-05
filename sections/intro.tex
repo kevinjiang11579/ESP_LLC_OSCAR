@@ -10,10 +10,10 @@ protocol. For example, Giri et al. propose a cache hierarchy for heterogeneous
 SoCs built on top of a network-on-chip (NoC) \cite{giri18}.  Their cache
 hierarchy supports multicore execution of processor cores and enables multiple
 different coherence modes for hardware accelerators.  Utilization of these
-modes can improve execution time and reduce off-chip memory acceses for a
+modes can improve execution time and reduce off-chip memory accesses for a
 variety of different workloads \cite{giri_ieeemicro18, zuckerman_micro21}.
 
-\par ESP is an open-source platform for hetergeneous SoC design that simplifies
+\par ESP is an open-source platform for heterogeneous SoC design that simplifies
 the integration of new IP blocks within a scalable SoC architecture and allows
 for rapid prototyping of full systems \cite{mantovani_iccad20}. ESP's cache
 hierarchy implements the protocol proposed by Giri et al -- an extended MESI
@@ -30,4 +30,4 @@ throughput. Since the last-level cache is the main synchronization point for
 the various IPs throughout an SoC, this can give significant performance
 improvements when there is a high density of requests at the LLC. In
 particular, we show how the pipelined datapath can improve the performance of
-accelerators that acceess their data directly from the LLC.
+accelerators that access their data directly from the LLC.

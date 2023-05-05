@@ -19,7 +19,7 @@ coherence among all L2 caches in the system, and a channel to external DRAM.
 The LLC can be partitioned across multiple memory tiles in the system with each
 partition serving a discrete partition of the global address space and
 providing its own channel to DRAM. The LLC can also handle DMA requests
-directly from accelerators, saving off-chip memory accessees in many
+directly from accelerators, saving off-chip memory accesses in many
 circumstances.
 
 \par Compared to the L1 and L2 caches, the LLC contains additional metadata for
@@ -28,8 +28,10 @@ share the cache line. These metadata are necessary for the execution of the
 extended MESI directory-based cache coherence protocol.  In addition to the
 standard MESI states (Modified, Exclusive, Shared, Invalid), the ESP coherence
 protocol introduces a Valid state, which corresponds to lines that are not
-owned or shared by any private cache. Maintaining a Valid state saves an off-chip memory access to subsequent requests for this line; it is also used to represent
-lines that have been accessed by an accelerator through DMA to the LLC. Valid lines are allso the first choices for evictions.
+owned or shared by any private cache. Maintaining a Valid state saves an
+off-chip memory access to subsequent requests for this line; it is also used to
+represent lines that have been accessed by an accelerator through DMA to the
+LLC. Valid lines are also the first choices for evictions.
 
 The various caches and processing elements in ESP communicate through the NoC.
 Three NoC planes are used for coherence requests, responses, and forwards,
