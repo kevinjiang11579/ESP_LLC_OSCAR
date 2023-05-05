@@ -8,14 +8,16 @@ six stages.  In any given cycle, only one stage of the datapath is active. For
 example, the first stage, which prioritizes and accepts the incoming requests,
 is idle while later stages of the datapath are operating. This means that only
 one request is processed by the LLC at a time, which can create backpressure
-on the NoC if many requests arrive in a short time.
+on the NoC if many requests arrive in a short time. The microarchitecture for 
+this implementation is shown in Figure \ref{fig:original_muarc}.
 \subsection{Pipelined LLC}
 In this work, we took the existing six-stage datapath and enabled the pipelined
 execution of requests. We use the same six stages from the multicycle datapath
 and add pipeline registers in between each stage and logic for exerting backpressure
 between individual stages. The FSM that governs the execution of an individual request
-is removed, all stages can be active in any given cycle. This implementation allows
-for the simultaneous processing of multiple requests.
+is removed, and all stages can be active in any given cycle. This implementation allows
+for the simultaneous processing of multiple requests. The microarchitecture for 
+this implementation is shown in Figure \ref{fig:pipeline_muarc}.
 
 \par Pipelining a multi-cycle datapath presents numerous challenges. Signals
 from previous stages that would previously stay constant throughout the
@@ -68,3 +70,22 @@ new "request" to insert into the second pipeline stage every cycle, allowing
 the DMA request to fully utilize all stages of the pipeline. When the accelerator
 data resides in the LLC, this allows a new cache line to be sent or written every
 cycle, as opposed to every six cycles in the old implementation.
+
+
+\begin{figure*}[t]
+    \centering
+    \captionsetup{justification=centering, format=hang}
+    \includegraphics[width=1\textwidth]{fig/LLC_muarc_original.png}
+    \caption{Microarchitecture of Original LLC}
+    \label{fig:original_muarc}
+    \end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \captionsetup{justification=centering, format=hang}
+    \includegraphics[width=1\textwidth]{fig/LLC_muarc_pipeline2.png}
+    \caption{Microarchitecture of Pipelined LLC. Major structural modifications are highlighted in blue.}
+    \label{fig:pipeline_muarc}
+    \end{figure*}
+  
+  
