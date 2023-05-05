@@ -1,0 +1,32 @@
+\section{The ESP LLC Implementations}
+\label{sec:llcImplementations}
+\subsection{Original LLC}
+The original LLC implements a multi-cycle datapath for handling requests according to the extended MESI protocol. The multi-cycle datapath consists of six stages, and the LLC contains an FSM to control each stage of the datapath.
+The FSM transitions between six states when servicing a request, each state corresponding to a stage in the datapath. 
+When servicing a requests from a private cache or a DMA controller, only one stage of the datapath is active during any state of the FSM. The first stage is responsible for accepting 
+new requests coming in from the NoC. However, during the later states of servicing a request, the earlier stages including the first stage will be idle, building up backpressure against later requests.
+\subsection{Pipelined LLC}
+The pipelined LLC implements a six-stage pipeline datapath for handling requests. Each stage is taken from the multi-cycle datapath and modified with additional logic 
+that allows for backpressure between individual stages rather than just between the entire LLC and the NoC. Because there is no longer an FSM for controlling the datapath, 
+all stages are always active and handling a request, while the first stage still provides backpressure to the NoC if theres is backpressure from later stages. This implementation
+eliminates idle times in earlier stages and allows multiple requests to exist the datapath simultaneously. 
+\par Converting a multi-cycle datapath into a pipeline datapath presents numerous challenges. While later stages in the multi-cycle datapath can rely on the outputs of earlier stages to 
+stay constant throughout the entire duration of servicing a request, this is not the case in the pipeline datapath, where new requests will enter earlier stages before older requests have finished traversing all pipeline stages. 
+These signals will inevitably change before the completion of one request, and therefore required careful redesign to enable them to be sent through the pipeline.
+\par Another challenge is avoiding read-after-write (RAW) hazards and read/write collisions. The ESP LLC implements a set-associative cache, meaning the local memory
+of the LLC is addressed with the set portion of a memory address. Two stages in the pipeline interface with the local memory in LLC. The second stage 
+reads from local memory, while the sixth stage writes to local memory. To prevent the two hazards mentioned, whenever there are two requests addressing the same set, the second stage 
+can handle the later request only after the first request leaves the sixth stage and writing is complete. Our solution is adding a set table which keeps track of the sets of all requests currently 
+in the pipeline datapath. The second stage checks the set table before handling a new request, while the sixth stage removes a set from the table once writing is complete. While these hazards do not apply to requests addressing 
+different sets, the local memory in the multi-cycle datapath was not configured for reading and writing to different sets in the same cycle. In the pipeline datapath, the local memory is configured to be capable of same cycle 
+read/write of different sets in order to maximize throughput of independent requests.
+\par Pipelining the multi-cycle datapath also introduced potential for undesired out-of-order completion of requests. There are two problematic cases: when the LLC wants to recall an Exclusive or Modified 
+cache line from L1/L2 for eviction, and when there is a cache line in a transient state waiting for a data response from L1/L2. In both cases, the LLC should not service any newer requests until the data response from L1/L2 has been 
+recieved and completely serviced. However, these cases are realized only at the fifth stage, and newer independent requests will enter earlier stages before the data response. Our solution was to add a feature to the 
+fifth stage that stalls the first stage and flushes all the newer requests in the pipeline into a FIFO, and the LLC will then prioritize feeding requests from the FIFO back into the pipeline 
+once the data response has been received and serviced.
+\par While the original LLC signifacntly improved DMA speed for accelerators, the pipelinined LLC takes it a step further. Large DMA request spans multiple cache lines, 
+with each cache line functionally acting as a new independent "request" for a different address. The pipelined LLC is designed to generate a new "request" to insert into the second pipeline stage every cycle,  
+allowing the DMA request to fully utilize all stages of the pipeline. This provides a significant speedup if the data 
+being requested exists in the LLC, because later stages do not need to request data from main memory and force backpressure to earlier stages.
+
