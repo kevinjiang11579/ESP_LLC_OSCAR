@@ -1,10 +1,10 @@
 \section{Introduction}
 \label{sec:intro}
 
-Systems-on-chip (SoCs) that integrate a heterogeneous mix of complex IP blocks
-can utilize on-chip shared memory to improve performance and simplify
-programming \cite{spandex, cohort, li2023duet, mantovani_cases16}.  Like that
-of traditional homogeneous architectures, the memory hierarchy of heterogeneous
+System-on-chip (SoC) architectures that integrate a heterogeneous mix of
+complex IP blocks can utilize on-chip shared memory to improve performance and
+simplify programming \cite{spandex, cohort, li2023duet, mantovani_cases16}.  As
+in traditional homogeneous architectures, the memory hierarchy of heterogeneous
 SoCs may feature multiple levels of caches, orchestrated by a cache coherence
 protocol. For example, Giri et al. propose a cache hierarchy for heterogeneous
 SoCs built on top of a network-on-chip (NoC) \cite{giri18}.  Their cache
@@ -16,18 +16,18 @@ variety of different workloads \cite{giri_ieeemicro18, zuckerman_micro21}.
 \par ESP is an open-source platform for heterogeneous SoC design that simplifies
 the integration of new IP blocks within a scalable SoC architecture and allows
 for rapid prototyping of full systems \cite{mantovani_iccad20}. ESP's cache
-hierarchy implements the protocol proposed by Giri et al -- an extended MESI
-directory-based protocol.  The L1 of open-source processors (that potentially
-implement different ISAs) interfaces to the ESP L2. The last-level cache (LLC)
+hierarchy implements the protocol proposed by Giri et al. -- an extended MESI
+directory-based protocol.  The L1 of open-source processors, which potentially
+implement different ISAs, interfaces to the ESP L2. The last-level` cache (LLC)
 and directory controller not only orchestrate coherence across these L2 caches
 but also enable accelerators without a private cache to leverage the cache
 hierarchy to access on-chip shared data.
 
 \par In this work, we present an improved version of the ESP LLC. While the
 original version is implemented with a multi-cycle datapath, the improved
-version features a pipelined datapath, allowing for significantly greater
+version features a pipelined datapath, allowing for substantially greater
 throughput. Since the last-level cache is the main synchronization point for
 the various IPs throughout an SoC, this can give significant performance
 improvements when there is a high density of requests at the LLC. In
-particular, we show how the pipelined datapath can improve the performance of
-accelerators that access their data directly from the LLC.
+particular, we show how the pipelined datapath can result in an average memory
+access speedup of 20\% for accelerators that access their data from the LLC.

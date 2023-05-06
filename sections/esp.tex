@@ -23,7 +23,7 @@ directly from accelerators, saving off-chip memory accesses in many
 circumstances.
 
 \par Compared to the L1 and L2 caches, the LLC contains additional metadata for
-all cache lines active in the system at any point, such as which cores own or
+all cache lines currently active in the system, such as which cores own or
 share the cache line. These metadata are necessary for the execution of the
 extended MESI directory-based cache coherence protocol.  In addition to the
 standard MESI states (Modified, Exclusive, Shared, Invalid), the ESP coherence
@@ -49,7 +49,7 @@ while two planes are used for DMA requests and responses from/to accelerators.
   \centering
   \captionsetup{justification=centering, format=hang}
   \includegraphics[width=1\columnwidth]{fig/noccache.png}
-  \caption{Detailed ESP Tile Grid~\cite{giri18}}
+  \caption{A 4x4 ESP instance with 2 processor tiles, 2 memory tiles, 11 accelerator tiles, and 1 auxiliary tiles. Elements of the cache hierarchy are shown in each tile's \textit{socket}.}
   \label{fig:esp_tile}
   \end{figure}
 
